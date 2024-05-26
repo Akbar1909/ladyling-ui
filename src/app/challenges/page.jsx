@@ -7,10 +7,12 @@ const Challenges = () => {
   return (
     <PageWrapper>
       <div className="flex flex-col space-y-4 space-y-reverse">
-        <h1 className="order-last text-center text-lg text-gray-700">
-          Participate, Learn, and Win Prizes!
+        <h1 className="order-last font-medium text-center text-lg text-gray-700">
+          <span className="text-blue-600">Participate,</span>{" "}
+          <span className="text-cyan-600">Learn,</span> and{" "}
+          <span className="text-red-600">Win Prizes</span>!
         </h1>
-        <h2 className="text-5xl font-bold text-center text-gray-900 sm:text-6xl">
+        <h2 className="text-5xl text-yellow-300 font-bold text-center  sm:text-6xl">
           LadyLing Academy Challenges
         </h2>
       </div>

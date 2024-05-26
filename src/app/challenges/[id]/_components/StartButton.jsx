@@ -23,7 +23,7 @@ const StartButton = () => {
     <Button
       onClick={() => mutate(id)}
       size="lg"
-      className="w-60 [&>span]:text-3xl text-center mt-12 rounded-none"
+      className="w-60 bg-slate-400 hover:bg-slate-200  [&>span]:text-3xl text-center mt-12 rounded-none"
     >
       Start
     </Button>
