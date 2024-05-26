@@ -1,16 +1,16 @@
 "use client";
+import { useParams } from "next/navigation";
 import { TelegramIcon, TelegramShareButton } from "react-share";
 
 const ShareButtons = () => {
+  const params = useParams();
+
+  const title = `${process.env.NEXT_PUBLIC_DOMAIN}/result/${params.attemptId}`;
+
   return (
-    <div className="flex flex-row items-center gap-1">
-      <TelegramShareButton
-        title={"I have finished the test"}
-        url={"https://t.me/ladylingacademy"}
-      >
-        <TelegramIcon size={32} />
-      </TelegramShareButton>
-    </div>
+    <TelegramShareButton title={"See my result🔥"} url={title}>
+      <TelegramIcon size={36} />
+    </TelegramShareButton>
   );
 };
 
