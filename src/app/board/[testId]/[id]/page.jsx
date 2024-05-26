@@ -12,6 +12,7 @@ import {
 import { BoardContext } from "./context";
 import { finishTest } from "@/data/attempt";
 import PageWrapper from "@/components/PageWrapper";
+import { twMerge } from "tailwind-merge";
 
 const BoardPage = () => {
   const router = useRouter();
@@ -37,10 +38,12 @@ const BoardPage = () => {
   });
 
   const handleFinish = () => {
-    const questions = Object.entries(values).map(([key, value]) => ({
-      id: Number(key),
-      selectedId: value,
-    }));
+    const questions = Object.entries(values).map(
+      ([key, { optionId, questionId }]) => ({
+        id: Number(questionId),
+        selectedId: optionId,
+      })
+    );
 
     const preparedData = {
       questions,
@@ -62,12 +65,37 @@ const BoardPage = () => {
   };
 
   const handleOptionPick = (optionId, questionId) =>
-    setValues((prev) => ({ ...prev, [questionId]: optionId }));
+    setValues((prev) => ({ ...prev, [page]: { optionId, questionId } }));
+
+  const questionsCount = Array.isArray(data?.questions)
+    ? data.questions.length
+    : 0;
+
+  const handlePaginationClick = (page) =>
+    router.push(`${pathname}?page=${page}`);
 
   return (
-    <BoardContext.Provider value={{ values, handleOptionPick, total }}>
+    <BoardContext.Provider value={{ values, handleOptionPick, total, page }}>
       <PageWrapper>
         <div className="h-screen w-full px-4">
+          <div className="flex flex-row flex-wrap gap-1">
+            {new Array(questionsCount).fill("").map((_, i) => {
+              return (
+                <div
+                  className={twMerge(
+                    "w-8 h-8 bg-white border flex items-center justify-center outline-none transition-all duration-200",
+                    page === i && "bg-slate-400 text-white",
+                    !values[i] && page !== i && "bg-slate-200 text-white"
+                  )}
+                  key={i}
+                  role="button"
+                  onClick={() => handlePaginationClick(i)}
+                >
+                  {i + 1}
+                </div>
+              );
+            })}
+          </div>
           {isSuccess ? <QuestionsList {...data} total={total} /> : null}
           <div
             onClick={handleNext}

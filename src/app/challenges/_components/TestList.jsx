@@ -15,7 +15,7 @@ const TestList = async () => {
     <ul className="space-y-8">
       <li className="space-y-4">
         <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
-          Current Tests
+          Current Challenges
         </h2>
         <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {active.map((test, i) => (
@@ -26,7 +26,7 @@ const TestList = async () => {
 
       <li className="space-y-4">
         <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
-          Upcoming Tests
+          Upcoming Challenges
         </h2>
         <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {upcoming.map((test, i) => (
