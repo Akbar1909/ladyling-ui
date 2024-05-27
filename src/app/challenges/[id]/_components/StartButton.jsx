@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Button } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 import { useMutation } from "@tanstack/react-query";
 import { startTest } from "@/data/attempt";
 import { useParams, useRouter } from "next/navigation";
@@ -11,7 +11,6 @@ const StartButton = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: startTest,
     onSuccess: (res) => {
-      console.log(res);
       router.replace(`/board/${res.data.testId}/${res.data.id}`);
     },
     onError: (err) => {
@@ -23,8 +22,10 @@ const StartButton = () => {
     <Button
       onClick={() => mutate(id)}
       size="lg"
-      className="w-60 bg-slate-400 hover:bg-slate-200  [&>span]:text-3xl text-center mt-12 rounded-none"
+      color="gray"
+      className="w-60 [&>span]:text-3xl text-center mt-12 rounded-none"
     >
+      {isPending && <Spinner aria-label="Spinner button example" size="sm" />}
       Start
     </Button>
   );

@@ -22,8 +22,6 @@ const AttemptResultPage = async ({ params }) => {
     ? data.test.questions
     : [];
 
-  console.log(data.test?.questions, resKeyValue);
-
   return (
     <PageWrapper>
       <div className="flex flex-col gap-8 w-full">
