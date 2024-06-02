@@ -20,7 +20,7 @@ const Challenges = () => {
         Welcome to the Challenges page! 🎉 Test your English skills with fun
         challenges in vocabulary, grammar, and more. Compete with others, climb
         the leaderboard, and win amazing prizes. Ready to learn and have fun?
-        Let's go! 🚀
+        Let &apos s go! 🚀
       </p>
       <div className="w-full mt-4">
         <TestList />
