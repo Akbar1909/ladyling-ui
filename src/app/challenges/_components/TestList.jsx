@@ -9,7 +9,7 @@ const TestList = async () => {
     {}
   );
 
-  const { upcoming, active = [], closed } = preparedTests || {};
+  const { upcoming = [], active = [], closed } = preparedTests || {};
 
   return (
     <ul className="space-y-8">
