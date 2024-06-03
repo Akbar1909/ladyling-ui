@@ -84,8 +84,7 @@ const BoardPage = () => {
                 <div
                   className={twMerge(
                     "w-8 h-8 bg-white border flex items-center justify-center outline-none transition-all duration-200",
-                    page === i && "bg-slate-400 text-white",
-                    !values[i] && page !== i && "bg-slate-200 text-white"
+                    page === i && "bg-slate-400 text-white"
                   )}
                   key={i}
                   role="button"

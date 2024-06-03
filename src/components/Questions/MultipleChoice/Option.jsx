@@ -14,7 +14,7 @@ const Option = ({ label, isCorrect, text, id, questionId, ...rest }) => {
         values[page]?.optionId === id && "bg-gray-200"
       )}
     >
-      <div className="text-gray-400 text-base">
+      <div className="text-gray-800 text-base">
         <span>{label}.</span>
         <span>{text}</span>
       </div>

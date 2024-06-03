@@ -28,11 +28,13 @@ const TestList = async () => {
         <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
           Upcoming Challenges
         </h2>
-        <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {upcoming.map((test, i) => (
-            <TestCard key={i} {...test} />
-          ))}
-        </ul>
+        {upcoming.length > 0 && (
+          <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {upcoming.map((test, i) => (
+              <TestCard key={i} {...test} />
+            ))}
+          </ul>
+        )}
       </li>
     </ul>
   );

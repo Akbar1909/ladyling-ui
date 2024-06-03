@@ -3,6 +3,8 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
 import ShareButtons from "./_components/ShareButtons";
+import { getEmojiType } from "@/utils/common";
+import Emoji from "@/components/Emoji";
 
 const AttemptResultPage = async ({ params }) => {
   const response = await fetch(
@@ -22,10 +24,15 @@ const AttemptResultPage = async ({ params }) => {
     ? data.test.questions
     : [];
 
+  const type = getEmojiType(data?.totalCount, data?.correctCount);
+
   return (
     <PageWrapper>
       <div className="flex flex-col gap-8 w-full">
-        <ShareButtons />
+        <div className="flex flex-row items-center justify-between">
+          <ShareButtons type={type} />
+          <Emoji type={type} />
+        </div>
         <article className="grid grid-cols-2 gap-2">
           <div className="flex text-center flex-col gap-1 col-span-2">
             <h2 className="text-2xl font-bold">Total</h2>
