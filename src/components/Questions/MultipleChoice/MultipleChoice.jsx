@@ -13,8 +13,8 @@ const MultipleChoice = ({
   current,
 }) => {
   return (
-    <article className="bg-white py-5">
-      <div className="flex justify-between mb-4">
+    <article className="bg-white">
+      <div className="flex justify-between mb-2">
         <span className="text-gray-400 text-xs">
           Question {current}/{total}
         </span>

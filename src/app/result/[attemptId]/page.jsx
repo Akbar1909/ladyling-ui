@@ -1,15 +1,16 @@
-import PageWrapper from "@/components/PageWrapper";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
 import ShareButtons from "./_components/ShareButtons";
-import { getEmojiType } from "@/utils/common";
+import { formatTime, getEmojiType } from "@/utils/common";
 import Emoji from "@/components/Emoji";
 
 const AttemptResultPage = async ({ params }) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/attempt/details/${params.attemptId}`,
-    { cache: "no-cache" }
+    {
+      cache: "no-cache",
+    }
   );
   const data = await response.json();
 
@@ -27,14 +28,19 @@ const AttemptResultPage = async ({ params }) => {
   const type = getEmojiType(data?.totalCount, data?.correctCount);
 
   return (
-    <PageWrapper>
+    <>
       <div className="flex flex-col gap-8 w-full">
         <div className="flex flex-row items-center justify-between">
           <ShareButtons type={type} />
           <Emoji type={type} />
+          <div className="border border-gray-200 h-10 px-2 py-1">
+            <h1 className="text-2xl font-medium">
+              {formatTime(data?.spendedTime)}
+            </h1>
+          </div>
         </div>
-        <article className="grid grid-cols-2 gap-2">
-          <div className="flex text-center flex-col gap-1 col-span-2">
+        <article className="grid grid-cols-3 gap-2">
+          <div className="flex text-center flex-col gap-1 scale-90">
             <h2 className="text-2xl font-bold">Total</h2>
             <p className="text-2xl font-medium">{data?.totalCount}</p>
           </div>
@@ -44,7 +50,7 @@ const AttemptResultPage = async ({ params }) => {
             <p className="text-2xl font-medium">{data?.correctCount}</p>
           </div>
 
-          <div className="flex text-center flex-col gap-1 text-red-400">
+          <div className="flex text-center flex-col gap-1 text-red-400 scale-90">
             <h2 className="text-2xl font-bold">Wrong</h2>
             <p className="text-2xl font-medium">
               {data?.totalCount - data?.correctCount}
@@ -113,7 +119,7 @@ const AttemptResultPage = async ({ params }) => {
           Back to Challenges
         </Link>
       </div>
-    </PageWrapper>
+    </>
   );
 };
 

@@ -9,7 +9,7 @@ const TestList = async () => {
     {}
   );
 
-  const { upcoming = [], active = [], closed } = preparedTests || {};
+  const { upcoming = [], active = [] } = preparedTests || {};
 
   return (
     <ul className="space-y-8">
@@ -24,18 +24,19 @@ const TestList = async () => {
         </ul>
       </li>
 
-      <li className="space-y-4">
-        <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
-          Upcoming Challenges
-        </h2>
-        {upcoming.length > 0 && (
+      {upcoming.length > 0 && (
+        <li className="space-y-4">
+          <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
+            Upcoming Challenges
+          </h2>
+
           <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {upcoming.map((test, i) => (
               <TestCard key={i} {...test} />
             ))}
           </ul>
-        )}
-      </li>
+        </li>
+      )}
     </ul>
   );
 };

@@ -8,14 +8,12 @@ const QuestionsList = ({ questions, total }) => {
   const page = Number(searchParams.get("page")) || 0;
 
   return (
-    <div className="py-6">
-      <QuestionsWidget
-        type="multiple-choice"
-        total={total}
-        current={page + 1}
-        {...questions?.[page]}
-      />
-    </div>
+    <QuestionsWidget
+      type="multiple-choice"
+      total={total}
+      current={page + 1}
+      {...questions?.[page]}
+    />
   );
 };
 

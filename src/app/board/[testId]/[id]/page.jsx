@@ -11,8 +11,10 @@ import {
 } from "next/navigation";
 import { BoardContext } from "./context";
 import { finishTest } from "@/data/attempt";
-import PageWrapper from "@/components/PageWrapper";
 import { twMerge } from "tailwind-merge";
+import { Spinner } from "flowbite-react";
+import Timer from "@/components/Timer";
+import { getSpendedTime } from "@/utils/common";
 
 const BoardPage = () => {
   const router = useRouter();
@@ -48,7 +50,10 @@ const BoardPage = () => {
     const preparedData = {
       questions,
       attemptId: Number(id),
+      spendedTime: getSpendedTime(),
     };
+
+    localStorage.removeItem("seconds");
 
     finishMutation.mutate(preparedData);
   };
@@ -64,47 +69,71 @@ const BoardPage = () => {
     router.push(`${pathname}?page=${page + 1}`);
   };
 
+  const handlePrev = () => {
+    if (page === 0) {
+      return;
+    }
+
+    router.push(`${pathname}?page=${page - 1}`);
+  };
+
   const handleOptionPick = (optionId, questionId) =>
     setValues((prev) => ({ ...prev, [page]: { optionId, questionId } }));
 
-  const questionsCount = Array.isArray(data?.questions)
-    ? data.questions.length
-    : 0;
+  // const questionsCount = Array.isArray(data?.questions)
+  //   ? data.questions.length
+  //   : 0;
 
-  const handlePaginationClick = (page) =>
-    router.push(`${pathname}?page=${page}`);
+  // const handlePaginationClick = (page) =>
+  //   router.push(`${pathname}?page=${page}`);
 
   return (
     <BoardContext.Provider value={{ values, handleOptionPick, total, page }}>
-      <PageWrapper>
-        <div className="h-screen w-full px-4">
-          <div className="flex flex-row flex-wrap gap-1">
-            {new Array(questionsCount).fill("").map((_, i) => {
-              return (
-                <div
-                  className={twMerge(
-                    "w-8 h-8 bg-white border flex items-center justify-center outline-none transition-all duration-200",
-                    page === i && "bg-slate-400 text-white"
-                  )}
-                  key={i}
-                  role="button"
-                  onClick={() => handlePaginationClick(i)}
-                >
-                  {i + 1}
-                </div>
-              );
-            })}
+      <div className="h-screen w-full px-4">
+        <div className="mb-4">
+          <Timer />
+        </div>
+        {isSuccess ? <QuestionsList {...data} total={total} /> : null}
+        <div className="flex flex-row items-center pt-6">
+          <div
+            onClick={handlePrev}
+            role="button"
+            className={twMerge(
+              "w-full  border border-gray-600 hover:bg-gray-100 cursor-pointer flex items-center justify-center h-16 relative bottom-0  font-medium text-2xl border-r-0",
+              page === 0 &&
+                "bg-gray-200 opacity-40 pointer-events-none cursor-not-allowed"
+            )}
+          >
+            Prev
           </div>
-          {isSuccess ? <QuestionsList {...data} total={total} /> : null}
           <div
             onClick={handleNext}
+            aria-disabled={page === 0}
             role="button"
             className="w-full  border border-gray-600 hover:bg-gray-100 cursor-pointer flex items-center justify-center h-16 relative bottom-0  font-medium text-2xl"
           >
-            {page + 1 === total ? "Finish" : "Next Question"}
+            {finishMutation.isPending && <Spinner className="mr-2" />}
+            {page + 1 === total ? "Finish" : "Next"}
           </div>
         </div>
-      </PageWrapper>
+        {/* <div className="flex flex-row mt-4 flex-wrap gap-1">
+          {new Array(questionsCount).fill("").map((_, i) => {
+            return (
+              <div
+                className={twMerge(
+                  "w-8 h-8 bg-white border flex items-center justify-center outline-none transition-all duration-200",
+                  page === i && "bg-slate-400 text-white"
+                )}
+                key={i}
+                role="button"
+                onClick={() => handlePaginationClick(i)}
+              >
+                {i + 1}
+              </div>
+            );
+          })}
+        </div> */}
+      </div>
     </BoardContext.Provider>
   );
 };

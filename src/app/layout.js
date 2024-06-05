@@ -1,7 +1,10 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Content from "@/components/Layout/Content";
-import QueryClientProvider from "@/providers/query-client";
+import AllProviders from "@/providers";
+import EnterButton from "@/components/EnterButton";
+import PageWrapper from "@/components/PageWrapper";
+import Header from "@/components/Layout/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryClientProvider>
-          <Content>{children}</Content>
-        </QueryClientProvider>
+        <AllProviders>
+          <Content>
+            <PageWrapper>
+              <Header />
+              {children}
+            </PageWrapper>
+          </Content>
+        </AllProviders>
       </body>
     </html>
   );

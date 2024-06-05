@@ -42,7 +42,7 @@ const allEmojis = {
 const Emoji = ({ type }) => {
   const emojis = allEmojis[type];
   const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-  return <img src={randomEmoji} alt="Cancer" width="60" height="60" />;
+  return <img src={randomEmoji} alt="Cancer" width="40" height="40" />;
 };
 
 export default Emoji;

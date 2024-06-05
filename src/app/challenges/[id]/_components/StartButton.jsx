@@ -22,7 +22,7 @@ const StartButton = () => {
     <Button
       onClick={() => mutate(id)}
       size="lg"
-      color="gray"
+      color="primary"
       className="w-60 [&>span]:text-3xl text-center mt-12 rounded-none"
     >
       {isPending && <Spinner aria-label="Spinner button example" size="sm" />}

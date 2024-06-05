@@ -1,20 +1,17 @@
 "use client";
 import axios from "axios";
-import { Cookies } from "react-cookie";
 // import { cookies } from 'next/headers'
 
 const axiosCommonHeaderConfig = {
   "Content-Type": "application/json",
 };
 
-const cookie = new Cookies();
-
 const wrapWithInterceptor = (request) => {
   request.interceptors.request.use((config) => {
-    return {
-      ...config,
-      signal: controller.signal,
-    };
+    const accessToken = localStorage.getItem("token");
+
+    config.headers["Authorization"] = `Bearer ${accessToken}`;
+    return config;
   });
 
   // Add a response interceptor
@@ -35,9 +32,11 @@ const wrapWithInterceptor = (request) => {
   return request;
 };
 
-const request = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
-  headers: axiosCommonHeaderConfig,
-});
+const request = wrapWithInterceptor(
+  axios.create({
+    baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+    headers: axiosCommonHeaderConfig,
+  })
+);
 
 export { request };
