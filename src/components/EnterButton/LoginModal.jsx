@@ -17,7 +17,7 @@ const LoginModal = () => {
     mutationKey: ["enter-mutation"],
     mutationFn: enter,
     onSuccess: ({ data }) => {
-      cookie.set("token", data?.access_token);
+      cookie.set("token", data?.access_token, { path: "/" });
       toggle();
       setToken();
     },

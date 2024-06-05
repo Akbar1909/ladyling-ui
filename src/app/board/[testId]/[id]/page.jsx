@@ -54,7 +54,7 @@ const BoardPage = () => {
       spendedTime: getSpendedTime(),
     };
 
-    cookie.remove("seconds");
+    cookie.remove("seconds", { path: "/" });
 
     finishMutation.mutate(preparedData);
   };
@@ -62,6 +62,9 @@ const BoardPage = () => {
   const total = Array.isArray(data?.questions) ? data.questions.length : 0;
 
   const handleNext = () => {
+    if (finishMutation.isPending) {
+      return;
+    }
     if (page + 1 === total) {
       handleFinish();
       return;

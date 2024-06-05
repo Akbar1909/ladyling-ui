@@ -13,7 +13,7 @@ const Timer = () => {
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => {
         const newSeconds = prevSeconds + 1;
-        cookie.set("seconds", newSeconds);
+        cookie.set("seconds", newSeconds, { path: "/" });
         return newSeconds;
       });
     }, 1000);
