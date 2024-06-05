@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Button, Label, Modal, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
 import useAuthStore from "@/providers/zustand/auth";
+import cookie from "@/utils/cookie";
 
 const LoginModal = () => {
   const { open, toggle } = useEnterModal((state) => ({ ...state }));
@@ -16,7 +17,7 @@ const LoginModal = () => {
     mutationKey: ["enter-mutation"],
     mutationFn: enter,
     onSuccess: ({ data }) => {
-      localStorage.setItem("token", data?.access_token);
+      cookie.set("token", data?.access_token);
       toggle();
       setToken();
     },

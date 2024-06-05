@@ -1,7 +1,9 @@
+"use client";
+import cookie from "@/utils/cookie";
 import { create } from "zustand";
 
 const useAuthStore = create((set) => ({
-  isAuthenticated: Boolean(localStorage.getItem("token")),
+  isAuthenticated: Boolean(cookie.get("token")),
   setToken: () => set(() => ({ isAuthenticated: true })),
 }));
 

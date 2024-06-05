@@ -1,3 +1,5 @@
+import cookie from "./cookie";
+
 export const getEmojiType = (totalQuestions, correctAnswers) => {
   const percentage = (correctAnswers / totalQuestions) * 100;
 
@@ -12,7 +14,7 @@ export const getEmojiType = (totalQuestions, correctAnswers) => {
 };
 
 export const getSpendedTime = () => {
-  const savedSeconds = localStorage.getItem("seconds");
+  const savedSeconds = cookie.get("seconds");
   return savedSeconds ? parseInt(savedSeconds, 10) : 0;
 };
 

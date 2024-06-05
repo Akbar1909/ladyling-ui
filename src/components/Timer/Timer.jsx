@@ -1,9 +1,11 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { formatTime } from "@/utils/common";
+import cookie from "@/utils/cookie";
 
 const Timer = () => {
   const [seconds, setSeconds] = useState(() => {
-    const savedSeconds = localStorage.getItem("seconds");
+    const savedSeconds = cookie.get("seconds");
     return savedSeconds ? parseInt(savedSeconds, 10) : 0;
   });
 
@@ -11,7 +13,7 @@ const Timer = () => {
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => {
         const newSeconds = prevSeconds + 1;
-        localStorage.setItem("seconds", newSeconds);
+        cookie.set("seconds", newSeconds);
         return newSeconds;
       });
     }, 1000);

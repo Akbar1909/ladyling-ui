@@ -1,4 +1,5 @@
 "use client";
+import cookie from "@/utils/cookie";
 import axios from "axios";
 // import { cookies } from 'next/headers'
 
@@ -8,7 +9,7 @@ const axiosCommonHeaderConfig = {
 
 const wrapWithInterceptor = (request) => {
   request.interceptors.request.use((config) => {
-    const accessToken = localStorage.getItem("token");
+    const accessToken = cookie.get("token");
 
     config.headers["Authorization"] = `Bearer ${accessToken}`;
     return config;

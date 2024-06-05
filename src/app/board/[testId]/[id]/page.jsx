@@ -15,6 +15,7 @@ import { twMerge } from "tailwind-merge";
 import { Spinner } from "flowbite-react";
 import Timer from "@/components/Timer";
 import { getSpendedTime } from "@/utils/common";
+import cookie from "@/utils/cookie";
 
 const BoardPage = () => {
   const router = useRouter();
@@ -53,7 +54,7 @@ const BoardPage = () => {
       spendedTime: getSpendedTime(),
     };
 
-    localStorage.removeItem("seconds");
+    cookie.remove("seconds");
 
     finishMutation.mutate(preparedData);
   };
