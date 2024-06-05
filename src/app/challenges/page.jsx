@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import TestList from "./_components/TestList";
 
 export const revalidate = 0;
@@ -17,11 +18,12 @@ const Challenges = () => {
       <p className="mx-auto mt-6 max-w-xl text-center text-pretty text-base/relaxed text-gray-700">
         Welcome to the Challenges page! 🎉 Test your English skills with fun
         challenges in vocabulary, grammar, and more. Compete with others, climb
-        the leaderboard, and win amazing prizes. Ready to learn and have fun?
-        Let &apos s go! 🚀
+        the leaderboard, and win amazing prizes.
       </p>
       <div className="w-full mt-4">
-        <TestList />
+        <Suspense fallback={<h1>Getting tests ⏰</h1>}>
+          <TestList />
+        </Suspense>
       </div>
     </>
   );
