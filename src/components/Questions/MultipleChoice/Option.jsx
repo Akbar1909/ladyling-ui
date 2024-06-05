@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
-import { BoardContext } from "@/app/board/[testId]/[id]/context";
 import { twMerge } from "tailwind-merge";
+import useBoardContext from "@/context/BoardContext/useBoardContext";
 
-const Option = ({ label, isCorrect, text, id, questionId, ...rest }) => {
-  const { values, handleOptionPick, page } = useContext(BoardContext);
+const Option = ({ label, isCorrect, text, id, questionId }) => {
+  const { values, handleOptionPick, page } = useBoardContext();
 
   return (
     <div

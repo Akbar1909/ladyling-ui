@@ -7,7 +7,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import { BoardContext } from "./context";
+import { BoardContext } from "@/context/BoardContext/context";
 import { finishTest } from "@/data/attempt";
 import { twMerge } from "tailwind-merge";
 import { Spinner } from "flowbite-react";
