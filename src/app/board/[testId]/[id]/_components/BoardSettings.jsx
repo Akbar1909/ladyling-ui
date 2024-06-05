@@ -18,7 +18,7 @@ import cookie from "@/utils/cookie";
 const BoardSettings = ({ children, total }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const { testId, id } = useParams();
+  const { id } = useParams();
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page")) || 0;
 
