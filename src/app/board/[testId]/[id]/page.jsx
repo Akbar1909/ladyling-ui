@@ -7,7 +7,10 @@ const BoardPage = async ({
   searchParams: { page = 0 },
 }) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/test/questions/${testId}`
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/test/questions/${testId}`,
+    {
+      cache: "no-cache",
+    }
   );
   const data = await res.json();
 
