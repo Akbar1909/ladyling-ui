@@ -79,8 +79,11 @@ const LoginModal = () => {
                 type="submit"
                 className="rounded-none w-full text-3xl"
               >
-                {enterMutation.isPending && <Spinner className="mr-2" />}
-                Enter
+                {enterMutation.isPending ? (
+                  <Spinner className="mr-2" />
+                ) : (
+                  "Enter"
+                )}
               </Button>
             </div>
           </form>

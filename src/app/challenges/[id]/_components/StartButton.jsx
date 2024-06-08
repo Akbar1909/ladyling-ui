@@ -40,8 +40,11 @@ const StartButton = () => {
       color="primary"
       className="w-60 [&>span]:text-3xl text-center mt-12 rounded-none"
     >
-      {isPending && <Spinner aria-label="Spinner button example" size="sm" />}
-      Start
+      {isPending ? (
+        <Spinner aria-label="Spinner button example" size="sm" />
+      ) : (
+        "Start"
+      )}
     </Button>
   );
 };

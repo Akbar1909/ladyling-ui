@@ -15,7 +15,7 @@ const BoardPage = async ({
 
   return (
     <BoardSettings total={total}>
-      <QuestionsList page={page} total={total} {...data} />
+      <QuestionsList page={parseInt(page, 10)} total={total} {...data} />
     </BoardSettings>
   );
 };

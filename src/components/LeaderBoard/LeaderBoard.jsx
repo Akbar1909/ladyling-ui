@@ -14,7 +14,11 @@ const LeaderBoard = async ({ testId }) => {
   const data = await response.json();
 
   if (!Array.isArray(data)) {
-    return null;
+    return <></>;
+  }
+
+  if (data.length === 0) {
+    return <></>;
   }
 
   const icons = {

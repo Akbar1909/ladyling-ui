@@ -105,8 +105,13 @@ const BoardSettings = ({ children, total }) => {
             role="button"
             className="w-full  border border-gray-600 hover:bg-gray-100 cursor-pointer flex items-center justify-center h-16 relative bottom-0  font-medium text-2xl"
           >
-            {finishMutation.isPending && <Spinner className="mr-2" />}
-            {page + 1 === total ? "Finish" : "Next"}
+            {finishMutation.isPending ? (
+              <Spinner className="mr-2" />
+            ) : page + 1 === total ? (
+              "Finish"
+            ) : (
+              "Next"
+            )}
           </div>
         </div>
       </div>

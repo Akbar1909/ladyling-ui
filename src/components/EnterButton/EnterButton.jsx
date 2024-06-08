@@ -15,11 +15,9 @@ const EnterButton = () => {
   }
 
   return (
-    <>
-      <Button color="primary" className="rounded-none w-32" onClick={toggle}>
-        Enter
-      </Button>
-    </>
+    <Button color="primary" className="rounded-none w-32" onClick={toggle}>
+      Enter
+    </Button>
   );
 };
 
