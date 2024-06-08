@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import StartButton from "./_components/StartButton";
 import PageWrapper from "@/components/PageWrapper";
+import LeaderBoard from "@/components/LeaderBoard";
 
 export const revalidate = 0;
 const Challenge = async (props) => {
@@ -23,6 +25,18 @@ const Challenge = async (props) => {
       </p>
 
       <StartButton />
+
+      <div className="mt-8 w-full">
+        <Suspense
+          fallback={
+            <h1 className="text-3xl text-center">
+              Getting the leader board ⏰
+            </h1>
+          }
+        >
+          <LeaderBoard testId={props.params.id} />
+        </Suspense>
+      </div>
     </PageWrapper>
   );
 };
