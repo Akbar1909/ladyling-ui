@@ -9,7 +9,7 @@ const LeaderBoard = async ({ testId }) => {
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/leaderboard/test/${testId}/${meId}`,
-    { cache: "no-cache" }
+    { next: { tags: ["leader-board"] }, cache: "no-cache" }
   );
   const data = await response.json();
 

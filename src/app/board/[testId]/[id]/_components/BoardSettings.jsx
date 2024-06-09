@@ -14,6 +14,7 @@ import { Spinner } from "flowbite-react";
 import Timer from "@/components/Timer";
 import { getSpendedTime } from "@/utils/common";
 import cookie from "@/utils/cookie";
+import { revalidateTag } from "next/cache";
 
 const BoardSettings = ({ children, total }) => {
   const router = useRouter();
@@ -57,6 +58,7 @@ const BoardSettings = ({ children, total }) => {
     }
     if (page + 1 === total) {
       handleFinish();
+
       return;
     }
 

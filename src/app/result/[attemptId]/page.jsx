@@ -7,10 +7,7 @@ import Emoji from "@/components/Emoji";
 
 const AttemptResultPage = async ({ params }) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/attempt/details/${params.attemptId}`,
-    {
-      cache: "no-cache",
-    }
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/attempt/details/${params.attemptId}`
   );
   const data = await response.json();
 
