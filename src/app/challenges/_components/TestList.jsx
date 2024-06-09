@@ -1,3 +1,4 @@
+import Empty from "@/components/Empty";
 import TestCard from "./TestCard";
 
 const TestList = async () => {
@@ -11,42 +12,55 @@ const TestList = async () => {
 
   const { upcoming = [], active = [], withPrize = [] } = preparedTests || {};
 
+  console.log(active);
+
   return (
     <ul className="space-y-8">
       <li className="space-y-4">
         <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
-          Challenges With Prizes
+          Current Challenges
+          <span className="text-gray-500 ml-2">({active.length})</span>
         </h2>
-        <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {withPrize.map((test, i) => (
-            <TestCard key={i} {...test} />
-          ))}
+        <ul className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          {active.length === 0 ? (
+            <Empty />
+          ) : (
+            active.map((test, i) => <TestCard key={i} {...test} />)
+          )}
         </ul>
       </li>
       <li className="space-y-4">
         <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
-          Current Challenges
+          Challenges With Prizes
+          <span className="text-gray-500 ml-2">({withPrize.length})</span>
         </h2>
-        <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {active.map((test, i) => (
-            <TestCard key={i} {...test} />
-          ))}
-        </ul>
+        {withPrize.length === 0 ? (
+          <Empty />
+        ) : (
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {withPrize.map((test, i) => (
+              <TestCard key={i} {...test} />
+            ))}
+          </ul>
+        )}
       </li>
 
-      {upcoming.length > 0 && (
-        <li className="space-y-4">
-          <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
-            Upcoming Challenges
-          </h2>
+      <li className="space-y-4">
+        <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
+          Upcoming Challenges
+          <span className="text-gray-500 ml-2">({upcoming.length})</span>
+        </h2>
 
-          <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        {upcoming.length === 0 ? (
+          <Empty />
+        ) : (
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {upcoming.map((test, i) => (
               <TestCard key={i} {...test} />
             ))}
           </ul>
-        </li>
-      )}
+        )}
+      </li>
     </ul>
   );
 };

@@ -22,7 +22,7 @@ export const isValidDateTime = (dateTime) => {
  * @returns {string} The formatted date string.
  */
 export const formatDate = (date, format = "DD.MM.YYYY") => {
-  return dayjs(date, "DD.MM.YYYY").format(format);
+  return dayjs(date).format(format);
 };
 
 /**
