@@ -15,6 +15,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          data-domain="ladyling.academy"
+          src="https://statspro.io/js/broadcaster.js"
+          async
+        >
+          {" "}
+        </script>
+      </head>
       <body className={inter.className}>
         <AllProviders>
           <Content>
