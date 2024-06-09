@@ -9,10 +9,20 @@ const TestList = async () => {
     {}
   );
 
-  const { upcoming = [], active = [] } = preparedTests || {};
+  const { upcoming = [], active = [], withPrize = [] } = preparedTests || {};
 
   return (
     <ul className="space-y-8">
+      <li className="space-y-4">
+        <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
+          Challenges With Prizes
+        </h2>
+        <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          {withPrize.map((test, i) => (
+            <TestCard key={i} {...test} />
+          ))}
+        </ul>
+      </li>
       <li className="space-y-4">
         <h2 className="text-lg text-left font-bold text-gray-900 sm:text-xl">
           Current Challenges

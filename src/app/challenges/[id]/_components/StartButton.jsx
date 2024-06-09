@@ -19,7 +19,7 @@ const StartButton = () => {
       router.replace(`/board/${res.data.testId}/${res.data.id}`);
     },
     onError: (err) => {
-      console.log(err);
+      alert("Something went wrong");
     },
   });
 

@@ -1,5 +1,5 @@
 import { getMe } from "@/data/user";
-import cookie from "@/utils/cookie";
+import cookie, { clearCookie } from "@/utils/cookie";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import useAuthStore from "@/providers/zustand/auth";
@@ -16,10 +16,16 @@ const useGetMe = () => {
 
   useEffect(() => {
     if (!state.isSuccess) {
+      clearCookie();
       return;
     }
 
-    cookie.set("temp", state.data?.id);
+    if (!state.data) {
+      clearCookie();
+      return;
+    }
+
+    cookie.set("temp", state.data?.id, { path: "/" });
   }, [state.isSuccess, state.data]);
 
   return { ...state };

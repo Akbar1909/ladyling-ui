@@ -14,7 +14,7 @@ import { Spinner } from "flowbite-react";
 import Timer from "@/components/Timer";
 import { getSpendedTime } from "@/utils/common";
 import cookie from "@/utils/cookie";
-import { revalidateTag } from "next/cache";
+import useDocumentVisibility from "@/hooks/helpers/useDocumentVisibility";
 
 const BoardSettings = ({ children, total }) => {
   const router = useRouter();
@@ -28,14 +28,14 @@ const BoardSettings = ({ children, total }) => {
   const finishMutation = useMutation({
     mutationFn: finishTest,
     mutationKey: ["finish-mutation"],
-    onSuccess: (res) => {
+    onSuccess: () => {
       router.replace(`/result/${id}`);
     },
   });
 
   const handleFinish = () => {
     const questions = Object.entries(values).map(
-      ([key, { optionId, questionId }]) => ({
+      ([_, { optionId, questionId }]) => ({
         id: Number(questionId),
         selectedId: optionId,
       })
@@ -51,6 +51,8 @@ const BoardSettings = ({ children, total }) => {
 
     finishMutation.mutate(preparedData);
   };
+
+  useDocumentVisibility(handleFinish);
 
   const handleNext = () => {
     if (finishMutation.isPending) {
