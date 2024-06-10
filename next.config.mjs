@@ -28,6 +28,11 @@ const nextConfig = {
         destination: "/challenges",
         permanent: true,
       },
+      {
+        source: "/challenges",
+        destination: "/challenges/4",
+        permanent: true,
+      },
     ];
   },
 };

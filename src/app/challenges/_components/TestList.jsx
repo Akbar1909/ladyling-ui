@@ -52,7 +52,7 @@ const TestList = async () => {
         {upcoming.length === 0 ? (
           <Empty />
         ) : (
-          <ul className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 pointer-events-none">
             {upcoming.map((test, i) => (
               <TestCard key={i} {...test} />
             ))}
