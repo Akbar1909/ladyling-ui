@@ -6,7 +6,6 @@ import { startTest } from "@/data/attempt";
 import { useParams, useRouter } from "next/navigation";
 import useEnterModal from "@/providers/zustand/ui";
 import useAuthStore from "@/providers/zustand/auth";
-import cookie from "@/utils/cookie";
 
 const StartButton = () => {
   const { id } = useParams();
@@ -15,10 +14,14 @@ const StartButton = () => {
   const router = useRouter();
   const { mutate, isPending } = useMutation({
     mutationFn: startTest,
-    onSuccess: (res) => {
-      router.replace(`/board/${res.data.testId}/${res.data.id}`);
+    onSuccess: ({ data }) => {
+      if (data.status === 403) {
+        alert("You have already tried");
+        return;
+      }
+      router.replace(`/board/${data.testId}/${data.id}`);
     },
-    onError: (err) => {
+    onError: () => {
       alert("Something went wrong");
     },
   });
@@ -30,8 +33,6 @@ const StartButton = () => {
           toggle();
           return;
         }
-
-        cookie.remove("seconds", { path: "/" });
 
         mutate(id);
       }}

@@ -12,8 +12,6 @@ const TestList = async () => {
 
   const { upcoming = [], active = [], withPrize = [] } = preparedTests || {};
 
-  console.log(active);
-
   return (
     <ul className="space-y-8">
       <li className="space-y-4">

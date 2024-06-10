@@ -1,19 +1,26 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { formatTime } from "@/utils/common";
-import cookie from "@/utils/cookie";
+import useGetSpendedTime from "@/hooks/api/useGetSpendedTime";
+import { useParams } from "next/navigation";
 
 const Timer = () => {
-  const [seconds, setSeconds] = useState(() => {
-    const savedSeconds = cookie.get("seconds");
-    return savedSeconds ? parseInt(savedSeconds, 10) : 0;
-  });
+  const { id } = useParams();
+  const [seconds, setSeconds] = useState(0);
+
+  const { data, isSuccess } = useGetSpendedTime(id);
+
+  useEffect(() => {
+    if (!isSuccess) {
+      return;
+    }
+    setSeconds(data);
+  }, [data, isSuccess]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => {
         const newSeconds = prevSeconds + 1;
-        cookie.set("seconds", newSeconds, { path: "/" });
         return newSeconds;
       });
     }, 1000);

@@ -37,6 +37,9 @@ const AttemptResultPage = async ({ params }) => {
             </h1>
           </div>
         </div>
+        <Link href="/challenges" className="underline text-blue-400">
+          Back to Challenge
+        </Link>
         <article className="grid grid-cols-3 gap-2">
           <div className="flex text-center flex-col gap-1 scale-90">
             <h2 className="text-2xl font-bold">Total</h2>
@@ -130,7 +133,7 @@ const AttemptResultPage = async ({ params }) => {
         )}
 
         <Link href="/challenges" className="underline text-blue-400">
-          Back to Challenges
+          Back to Challenge
         </Link>
       </div>
     </>

@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import {
   useParams,
@@ -31,9 +31,12 @@ const BoardSettings = ({ children, total }) => {
     onSuccess: () => {
       router.replace(`/result/${id}`);
     },
+    onError: (err) => {
+      alert("Something went wrong");
+    },
   });
 
-  const handleFinish = () => {
+  const handleFinish = useCallback(() => {
     const questions = Object.entries(values).map(
       ([_, { optionId, questionId }]) => ({
         id: Number(questionId),
@@ -50,9 +53,13 @@ const BoardSettings = ({ children, total }) => {
     cookie.remove("seconds", { path: "/" });
 
     finishMutation.mutate(preparedData);
-  };
+  }, [finishMutation, id, values]);
 
   useDocumentVisibility(handleFinish);
+
+  useEffect(() => {
+    () => handleFinish();
+  }, []);
 
   const handleNext = () => {
     if (finishMutation.isPending) {
