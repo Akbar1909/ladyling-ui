@@ -9,7 +9,7 @@ const ChallengeDetail = async ({ testId }) => {
         {data?.name}
       </h2>
 
-      {false ? (
+      {data?.description ? (
         <p className="mx-auto mt-6 max-w-xl text-pretty text-base/relaxed text-gray-700">
           {data.description}
         </p>
