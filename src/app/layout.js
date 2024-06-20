@@ -16,6 +16,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <meta
+          name="p:domain_verify"
+          content="65d60c9c30f23e2df63a52ad80215baa"
+        />
         <script
           data-domain="ladyling.academy"
           src="https://statspro.io/js/broadcaster.js"
